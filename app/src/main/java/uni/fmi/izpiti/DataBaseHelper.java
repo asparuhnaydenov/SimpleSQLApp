@@ -51,7 +51,24 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }else {
             return true;
         }
+    }
 
+    public boolean updateOne(CustomerModel customerModel){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(CUSTOMER_NAME, customerModel.getName());
+        cv.put(CUSTOMER_AGE, customerModel.getAge());
+        cv.put(ACTIVE_CUSTOMER, customerModel.isActive());
+
+        long update = db.update(CUSTOMER_TABLE, cv, null, null);
+
+        if(update == -1){
+            return false;
+        }else {
+            return true;
+        }
     }
 
     public boolean deleteOne(CustomerModel customerModel){
@@ -79,8 +96,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             do {
                 int customerID = cursor.getInt(0);
                 String customerName = cursor.getString(1);
-                int customerAge = cursor.getInt(2);
-                boolean customerActive = cursor.getInt(3) == 1 ? true:false;
+                int customerAge = cursor.getInt(3);
+                boolean customerActive = cursor.getInt(5) == 1 ? true:false;
                 CustomerModel newCustomer = new CustomerModel(customerID, customerName, customerAge, customerActive);
                 returnList.add(newCustomer);
             }while (cursor.moveToNext());

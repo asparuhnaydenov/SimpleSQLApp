@@ -88,15 +88,22 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 CustomerModel clickedCustomer = (CustomerModel) adapterView.getItemAtPosition(i);
-                dataBaseHelper.deleteOne(clickedCustomer);
+                dataBaseHelper.updateOne(clickedCustomer);
                 ShowCustomerOnListView(dataBaseHelper);
+
+                setNewDataValues(clickedCustomer);
 
                 Toast.makeText(MainActivity.this, "Deleted " + clickedCustomer.toString(), Toast.LENGTH_SHORT).show();
 
             }
         });
-
     }
+
+    private void setNewDataValues(CustomerModel clickedCustomer) {
+        et_name.setText(clickedCustomer.getName());
+        et_age.setText(Integer.parseInt(String.valueOf(clickedCustomer.getAge())));
+    }
+
 
     private void clearEditText() {
         et_name.setText("");

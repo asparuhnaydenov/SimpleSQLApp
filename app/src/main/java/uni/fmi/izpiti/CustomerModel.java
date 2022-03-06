@@ -24,9 +24,6 @@ public class CustomerModel {
                 '}';
     }
 
-    public CustomerModel() {
-    }
-
     public int getId() {
         return id;
     }
@@ -58,5 +55,4 @@ public class CustomerModel {
     public void setActive(boolean active) {
         isActive = active;
     }
-
 }
